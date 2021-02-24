@@ -9,53 +9,44 @@
 > 2. JAVA swing, awt
 
 ## 프로젝트 주요 기능
+![화면 캡처 2021-02-24 111638](https://user-images.githubusercontent.com/63631952/108937944-8abee080-7692-11eb-9d2c-40c8102ee43f.png)
 
 
-- 데이터베이스를 이용해 회원정보와 게시글리스트 관리
-  - 소스폴더에 패키지를 생성해서 자바빈을 이용하여 관리했습니다.
+
  ``` JAVA
- package user;
-
-public class User {
-	
-	private String userID;
-	private String userPassword;
-	private String userName;
-	private String userGender;
-	private String userEmail;
-	
-	public String getUserID() {
-		return userID;
-	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
-	public String getUserPassword() {
-		return userPassword;
-	}
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getUserGender() {
-		return userGender;
-	}
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
-	}
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-}
+public void actionPerformed(ActionEvent e) {
+    timer.start();
+	if(play) {
+		if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 8))){
+		    ballYdir = -ballYdir;
+		}
+			A: for(int i = 0; i<map.map.length; i++) {
+				for(int j = 0; j < map.map[0].length; j++) {
+					if(map.map[i][j] > 0) {
+						int brickX = j * map.brickWidth + 80;
+						int brickY = i * map.brickHeight + 50;
+						int brickWidth = map.brickWidth;
+						int brickHeight = map.brickHeight;
+						Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);
+						Rectangle ballRect = new Rectangle(ballposX, ballposY, 20, 20);
+						Rectangle brickRect = rect;
+						
+						if (ballRect.intersects(brickRect)) {
+							map.setBrickValue(0, i, j);
+							totalBricks--;
+							score += 5;
+							
+							if (ballposX + 19 <= brickRect.x || ballposX + 1 >= brickRect.x + brickRect.width) {
+								ballXdir = -ballXdir;
+							}else {
+								ballYdir = -ballYdir;
+							}
+							
+							break A;
+						}
+					}
+				}
+			}
 ```
 ![1](https://user-images.githubusercontent.com/63631952/94245412-2b2e9e80-ff55-11ea-8339-d01ca0fd906c.png)
 
