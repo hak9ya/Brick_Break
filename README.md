@@ -11,15 +11,16 @@
 ## 프로젝트 주요 기능
 ![화면 캡처 2021-02-24 111638](https://user-images.githubusercontent.com/63631952/108937944-8abee080-7692-11eb-9d2c-40c8102ee43f.png)
 
-
+- 전반적인 게임로직
 
  ``` JAVA
-public void actionPerformed(ActionEvent e) {
-    timer.start();
-	if(play) {
-		if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 8))){
-		    ballYdir = -ballYdir;
-		}
+	public void actionPerformed(ActionEvent e) {
+		timer.start();
+		
+		if(play) {
+			if(new Rectangle(ballposX, ballposY, 20, 20).intersects(new Rectangle(playerX, 550, 100, 8))){
+				ballYdir = -ballYdir;
+			}
 			A: for(int i = 0; i<map.map.length; i++) {
 				for(int j = 0; j < map.map[0].length; j++) {
 					if(map.map[i][j] > 0) {
@@ -48,46 +49,4 @@ public void actionPerformed(ActionEvent e) {
 				}
 			}
 ```
-![1](https://user-images.githubusercontent.com/63631952/94245412-2b2e9e80-ff55-11ea-8339-d01ca0fd906c.png)
 
-``` JAVA
-package user;
-
-//외부 라이브러리 추가
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-public class UserDAO {
-	
-	//데이터베이스에 접근하겠다는 하나의 객체
-	private Connection conn;
-	
-	//SQL 구문을 실행하는 하나의 객체
-	private PreparedStatement pstmt;
-	
-	//어떠한 정보를 담을수 있는 하나의 객체
-	private ResultSet rs;
-	
-	//생성자 생성, 자동으로 db connection이 이루어 질 수 있도록 함
-	public UserDAO() {
-		try {
-			String dbURL = "jdbc:mysql://localhost:3306/BOARDTEST";
-			String dbID = "";
-			String dbPassword = "";
-			
-			//Driver는 mysql에 접속할 수 있게 해주는 하나의 라이브러리
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-			
-		}
-	}
-```
-- 자바빈을 이용해서 로그인, 회원가입을 구현했습니다.
-- 게시판
-  - 게시글 작성 후 게시판리스트에 출력했습니다.
-  - 로그인한 아이디가 일치할 경우 게시글을 수정하고 삭제가 가능합니다.
